@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidura Naveen | Portfolio</title>
+    <meta name="description" content="Portfolio of Vidura Naveen, Associate Software Engineer specializing in Laravel, React, and Angular.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        
+        body {
+            background-color: #0f172a; /* Fallback */
+            color: #cbd5e1;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        /* 3D Tilt Effect Styles */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 selection:bg-cyan-300 selection:text-cyan-900 antialiased relative overflow-x-hidden">
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 font-mono">
+                &lt;VN /&gt;
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest font-medium">About</a>
+                <a href="#experience" class="text-slate-300 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest font-medium">Experience</a>
+                <a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest font-medium">Projects</a>
+                <a href="#contact" class="text-slate-300 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest font-medium">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-slate-300 hover:text-cyan-400 focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-800/95 backdrop-blur-xl border-t border-slate-700">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#about" class="mobile-link block px-3 py-4 text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-700/50 rounded-md">About</a>
+                <a href="#experience" class="mobile-link block px-3 py-4 text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-700/50 rounded-md">Experience</a>
+                <a href="#projects" class="mobile-link block px-3 py-4 text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-700/50 rounded-md">Projects</a>
+                <a href="#contact" class="mobile-link block px-3 py-4 text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-700/50 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
+                
+                <!-- Text Content -->
+                <div class="space-y-6 opacity-0 animate-[fadeInLeft_0.8s_ease-out_forwards]">
+                    <h2 class="text-cyan-400 font-mono text-lg tracking-wider">Hi, my name is</h2>
+                    <h1 class="text-5xl sm:text-7xl font-bold text-slate-100 leading-tight">
+                        Vidura Naveen.
+                    </h1>
+                    <h2 class="text-4xl sm:text-6xl font-bold text-slate-400 leading-tight">
+                        I build things for the web.
+                    </h2>
+                    <p class="max-w-xl text-slate-400 text-lg leading-relaxed mt-4">
+                        A graduate in Software Development and Associate Software Engineer specializing in building exceptional digital experiences. 
+                        Currently focused on modern full-stack development with Laravel, Angular, and React.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 pt-6">
+                        <a href="#contact" class="px-8 py-4 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/50 hover:bg-cyan-500/20 hover:scale-105 transition-all duration-300 font-medium flex items-center gap-2">
+                            Contact Me <i data-lucide="send" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://github.com/Vidura-Naveen" target="_blank" class="p-4 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-all border border-slate-700">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vidura-naveen" target="_blank" class="p-4 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-all border border-slate-700">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3D Visual Element -->
+                <div class="flex justify-center md:justify-end relative">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[100px] -z-10"></div>
+                    
+                    <div class="tilt-card w-full max-w-sm aspect-[4/5] glass-card rounded-2xl shadow-2xl p-8 flex flex-col justify-between relative overflow-hidden group cursor-pointer">
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                        
+                        <div class="relative z-10 pointer-events-none">
+                            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/20">
+                                <i data-lucide="code-2" class="text-white w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Full Stack Developer</h3>
+                            <p class="text-slate-400 text-sm">Bridging backend logic with frontend elegance.</p>
+                        </div>
+
+                        <div class="relative z-10 space-y-4 pointer-events-none">
+                            <div class="flex items-center gap-3 text-slate-300">
+                                <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                                <span>Available for new projects</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs font-mono px-2 py-1 rounded bg-slate-900/50 text-cyan-400 border border-cyan-900/30">Laravel</span>
+                                <span class="text-xs font-mono px-2 py-1 rounded bg-slate-900/50 text-cyan-400 border border-cyan-900/30">React</span>
+                                <span class="text-xs font-mono px-2 py-1 rounded bg-slate-900/50 text-cyan-400 border border-cyan-900/30">Angular</span>
+                                <span class="text-xs font-mono px-2 py-1 rounded bg-slate-900/50 text-cyan-400 border border-cyan-900/30">Flutter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-slate-500">
+                <div class="w-6 h-10 border-2 border-slate-500 rounded-full flex justify-center pt-2">
+                    <div class="w-1 h-2 bg-slate-500 rounded-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Skills -->
+        <section id="about" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-4 mb-12">
+                    <span class="text-cyan-400 font-mono text-xl">01.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-100">About & Skills</h2>
+                    <div class="h-px bg-slate-700 flex-grow max-w-xs ml-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 mb-16">
+                    <div class="text-slate-400 text-lg leading-relaxed space-y-4">
+                        <p>
+                            Hello! My name is Vidura Naveen, a dedicated software engineer with a passion for creating efficient, scalable systems. 
+                            My journey in tech started at the <span class="text-cyan-400">University of Vocational Technology</span> where I earned my B.Tech in Software Technology.
+                        </p>
+                        <p>
+                            Fast-forward to today, I've had the privilege of working at <span class="text-cyan-400">Databox Technologies</span> and the <span class="text-cyan-400">Arthur C Clarke Institute</span>. 
+                            I thrive on solving complex problems, whether it's optimizing database queries or crafting fluid user interfaces.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Stats Cards -->
+                        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 hover:border-cyan-500/30 transition-all group">
+                            <h4 class="text-4xl font-bold text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors">3+</h4>
+                            <p class="text-sm font-mono text-slate-400">Years Coding</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 hover:border-cyan-500/30 transition-all group">
+                            <h4 class="text-4xl font-bold text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors">10+</h4>
+                            <p class="text-sm font-mono text-slate-400">Projects</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 hover:border-cyan-500/30 transition-all group col-span-2">
+                            <h4 class="text-4xl font-bold text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors">3</h4>
+                            <p class="text-sm font-mono text-slate-400">Certifications (AWS, JS, Frontend)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Frontend -->
+                    <div class="tilt-card glass-card p-6 rounded-xl hover:bg-slate-800/50 h-full cursor-pointer">
+                        <div class="flex items-center gap-3 mb-4 pointer-events-none">
+                            <div class="p-3 rounded-lg bg-slate-900 shadow-inner">
+                                <i data-lucide="globe" class="text-purple-400 w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-200">Frontend</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pointer-events-none">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">Tailwind</span>
+                            <span class="skill-tag">Inertia JS</span>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="tilt-card glass-card p-6 rounded-xl hover:bg-slate-800/50 h-full cursor-pointer">
+                        <div class="flex items-center gap-3 mb-4 pointer-events-none">
+                            <div class="p-3 rounded-lg bg-slate-900 shadow-inner">
+                                <i data-lucide="database" class="text-cyan-400 w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-200">Backend</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pointer-events-none">
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Node.js</span>
+                        </div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="tilt-card glass-card p-6 rounded-xl hover:bg-slate-800/50 h-full cursor-pointer">
+                        <div class="flex items-center gap-3 mb-4 pointer-events-none">
+                            <div class="p-3 rounded-lg bg-slate-900 shadow-inner">
+                                <i data-lucide="cpu" class="text-pink-400 w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-200">Mobile</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pointer-events-none">
+                            <span class="skill-tag">Flutter</span>
+                            <span class="skill-tag">Dart</span>
+                            <span class="skill-tag">React Native</span>
+                        </div>
+                    </div>
+
+                    <!-- DevOps -->
+                    <div class="tilt-card glass-card p-6 rounded-xl hover:bg-slate-800/50 h-full cursor-pointer">
+                        <div class="flex items-center gap-3 mb-4 pointer-events-none">
+                            <div class="p-3 rounded-lg bg-slate-900 shadow-inner">
+                                <i data-lucide="terminal" class="text-yellow-400 w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-200">DevOps</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pointer-events-none">
+                            <span class="skill-tag">Git/GitHub</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Jira</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="py-20 bg-slate-800/20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-4 mb-12">
+                    <span class="text-cyan-400 font-mono text-xl">02.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-100">Where I've Worked</h2>
+                    <div class="h-px bg-slate-700 flex-grow max-w-xs ml-4"></div>
+                </div>
+
+                <div class="space-y-12 border-l-2 border-slate-700 ml-3 md:ml-0 pl-8 md:pl-0">
+                    
+                    <!-- Job 1 -->
+                    <div class="relative md:ml-12 group">
+                        <div class="absolute -left-[41px] md:-left-[57px] top-0 w-5 h-5 rounded-full border-4 border-slate-900 bg-cyan-500 group-hover:scale-125 transition-transform"></div>
+                        
+                        <div class="tilt-card bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/30 transition-colors cursor-pointer">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 pointer-events-none">
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Associate Software Engineer</h3>
+                                    <p class="text-cyan-500 font-medium text-sm">@ Databox Technologies</p>
+                                </div>
+                                <span class="font-mono text-xs text-slate-400 mt-2 sm:mt-0 bg-slate-900/50 px-3 py-1 rounded-full border border-slate-700">Aug 2024 - Present</span>
+                            </div>
+                            <ul class="space-y-3 pointer-events-none">
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Started as Trainee (4 months) promoted to Associate.
+                                </li>
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Core Technologies: Laravel, Angular, MySQL, REST APIs.
+                                </li>
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Contributed to IWMS (Aswesuma System) and DP Code.
+                                </li>
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Optimized code quality using Git and best practices.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="relative md:ml-12 group">
+                        <div class="absolute -left-[41px] md:-left-[57px] top-0 w-5 h-5 rounded-full border-4 border-slate-900 bg-cyan-500 group-hover:scale-125 transition-transform"></div>
+                        
+                        <div class="tilt-card bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/30 transition-colors cursor-pointer">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 pointer-events-none">
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Internship Trainee</h3>
+                                    <p class="text-cyan-500 font-medium text-sm">@ Arthur C Clarke Institute</p>
+                                </div>
+                                <span class="font-mono text-xs text-slate-400 mt-2 sm:mt-0 bg-slate-900/50 px-3 py-1 rounded-full border border-slate-700">6 Months</span>
+                            </div>
+                            <ul class="space-y-3 pointer-events-none">
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Backend component development using Laravel and PHP.
+                                </li>
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Developed internal projects optimizing data flow.
+                                </li>
+                                <li class="flex items-start gap-3 text-slate-400 text-sm">
+                                    <span class="text-cyan-500 mt-1.5">▹</span> Gained hands-on experience with modern web architecture.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-4 mb-12">
+                    <span class="text-cyan-400 font-mono text-xl">03.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-100">Featured Projects</h2>
+                    <div class="h-px bg-slate-700 flex-grow max-w-xs ml-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="tilt-card group relative bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500/40 flex flex-col h-full cursor-pointer">
+                        <div class="p-8 flex flex-col h-full pointer-events-none">
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="text-cyan-400">
+                                    <div class="p-3 bg-slate-900 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="globe" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 pointer-events-auto">
+                                    <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                                    <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">SL-Traveler</h3>
+                            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                                A comprehensive travel guide platform allowing users to explore destinations in Sri Lanka.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 mt-auto">
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">PHP</span>
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">HTML5</span>
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">JS</span>
+                            </div>
+                        </div>
+                        <div class="h-1 w-0 group-hover:w-full bg-cyan-500 transition-all duration-500 ease-out"></div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="tilt-card group relative bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500/40 flex flex-col h-full cursor-pointer">
+                        <div class="p-8 flex flex-col h-full pointer-events-none">
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="text-cyan-400">
+                                    <div class="p-3 bg-slate-900 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="user" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 pointer-events-auto">
+                                    <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                                    <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">Bus Tracking System</h3>
+                            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                                Real-time bus tracking and seat booking mobile application.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 mt-auto">
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">Flutter</span>
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">Firebase</span>
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">Maps API</span>
+                            </div>
+                        </div>
+                        <div class="h-1 w-0 group-hover:w-full bg-cyan-500 transition-all duration-500 ease-out"></div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="tilt-card group relative bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500/40 flex flex-col h-full cursor-pointer">
+                        <div class="p-8 flex flex-col h-full pointer-events-none">
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="text-cyan-400">
+                                    <div class="p-3 bg-slate-900 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 pointer-events-auto">
+                                    <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                                    <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">Password Manager</h3>
+                            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                                Secure desktop application for storing and managing user credentials locally.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 mt-auto">
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">C#</span>
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">.NET</span>
+                                <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-500/80 transition-colors">Security</span>
+                            </div>
+                        </div>
+                        <div class="h-1 w-0 group-hover:w-full bg-cyan-500 transition-all duration-500 ease-out"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section id="contact" class="py-24 text-center relative overflow-hidden">
+            <div class="max-w-2xl mx-auto px-4 relative z-10">
+                <p class="text-cyan-400 font-mono mb-4">04. What's Next?</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mb-6">Get In Touch</h2>
+                <p class="text-slate-400 text-lg mb-12">
+                    I'm currently looking for new opportunities to contribute my skills in full-stack development. 
+                    Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                </p>
+
+                <div class="flex justify-center gap-6 mb-12">
+                    <a href="mailto:viduranaween@gmail.com" class="px-8 py-4 rounded border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 transition-colors font-mono text-sm">
+                        Say Hello
+                    </a>
+                    <a href="tel:0717797759" class="px-8 py-4 rounded border border-slate-600 text-slate-300 hover:bg-slate-800 transition-colors font-mono text-sm flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> Call Me
+                    </a>
+                </div>
+
+                <div class="border-t border-slate-800 pt-8">
+                    <p class="text-slate-500 text-sm font-mono mb-2">Designed & Built by Vidura Naveen</p>
+                    <div class="flex justify-center gap-4 text-slate-500">
+                        <a href="https://github.com/Vidura-Naveen" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                        <a href="https://www.linkedin.com/in/vidura-naveen" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="mailto:viduranaween@gmail.com" class="hover:text-cyan-400 transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 2. Shared Style Helper for Tags
+        const skillTags = document.querySelectorAll('.skill-tag');
+        skillTags.forEach(tag => {
+            tag.className = "text-xs text-slate-400 bg-slate-900/80 px-2 py-1 rounded border border-slate-800";
+        });
+
+        // 3. 3D Tilt Effect Logic
+        const tiltCards = document.querySelectorAll('.tilt-card');
+
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calculate rotation (max 10 degrees)
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
+        // 4. Navbar Scroll Effect & Mobile Menu
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900/90', 'backdrop-blur-md', 'shadow-lg', 'py-4');
+                navbar.classList.remove('py-6');
+            } else {
+                navbar.classList.remove('bg-slate-900/90', 'backdrop-blur-md', 'shadow-lg', 'py-4');
+                navbar.classList.add('py-6');
+            }
+        });
+
+        let isMenuOpen = false;
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                // Force icon update logic if needed, simplified here
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 5. Particle Background System
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(100, 255, 218, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
