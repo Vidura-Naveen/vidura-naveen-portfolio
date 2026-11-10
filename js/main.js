@@ -228,32 +228,26 @@
        4. Hero
        ===================================================== */
     function buildHero() {
-        const tl = gsap.timeline({ paused: true });
-        let chars = $$('.hero__word');
+        const tl = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
 
-        if (hasSplit) {
-            chars = [];
-            $$('.hero__word').forEach((word) => {
-                const split = window.SplitText.create(word, { type: 'chars', aria: 'none' });
-                chars.push(...split.chars);
-            });
-        }
-        chars.push($('.hero__dot'));
-
-        tl.from(chars, {
-            yPercent: 115,
-            rotate: 8,
-            duration: 1.3,
-            ease: 'expo.out',
-            stagger: 0.04,
+        // Whole words rise out of their masked lines: calm, no per-letter jitter
+        tl.from('.hero__word', {
+            yPercent: 105,
+            duration: 1.4,
+            stagger: 0.12,
         })
+            .from('.hero__dot', {
+                autoAlpha: 0,
+                scale: 0.4,
+                duration: 0.8,
+                ease: 'back.out(2)',
+            }, 0.9)
             .from('[data-hero-fade]', {
                 autoAlpha: 0,
-                y: 24,
-                duration: 1,
-                ease: 'expo.out',
-                stagger: 0.1,
-            }, 0.35);
+                y: 16,
+                duration: 1.1,
+                stagger: 0.08,
+            }, 0.45);
 
         if (window.VNGL) {
             const glIntro = { v: 0 };
@@ -265,12 +259,14 @@
             }, 0);
         }
 
-        // Headline drifts apart as you scroll away
+        // Headline eases up and fades as you scroll away
         if (!reduceMotion) {
-            const lines = $$('.hero__title .line');
-            const scrub = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
-            gsap.to(lines[0], { xPercent: -10, ease: 'none', scrollTrigger: scrub });
-            gsap.to(lines[1], { xPercent: 8, ease: 'none', scrollTrigger: { ...scrub } });
+            gsap.to('.hero__title', {
+                y: () => -window.innerHeight * 0.12,
+                autoAlpha: 0.15,
+                ease: 'none',
+                scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
+            });
         }
 
         return tl;

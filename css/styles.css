@@ -19,7 +19,7 @@
   --radius: clamp(1rem, 1.6vw, 1.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --font-display: "Syne", "Arial Black", sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
 
@@ -205,7 +205,7 @@ strong {
 .preloader__count {
   align-self: flex-end;
   display: flex;
-  font: 800 clamp(6rem, 24vw, 22rem) / 0.8 var(--font-display);
+  font: 600 clamp(4rem, 11vw, 9rem) / 0.9 var(--font-display);
   letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
 }
@@ -670,21 +670,19 @@ strong {
 .hero__title {
   align-self: center;
   margin: clamp(2rem, 5vh, 4rem) 0;
-  /* "NAVEEN." in Syne 800 measures ~6.85em, so 11.6vw + 6vw indent stays inside the gutters */
-  font: 800 clamp(2.6rem, 11.6vw, 15rem) / 0.86 var(--font-display);
+  font: 600 clamp(3rem, 7.2vw, 7.5rem) / 1 var(--font-display);
   letter-spacing: -0.045em;
-  text-transform: uppercase;
 }
 
 .hero__title .line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.05em;
+  padding-bottom: 0.06em;
   white-space: nowrap;
 }
 
 .hero__title .line--indent {
-  padding-left: 6vw;
+  padding-left: 0;
 }
 
 .hero__word {
@@ -781,7 +779,7 @@ strong {
 .marquee__group li {
   display: flex;
   align-items: center;
-  font: 700 clamp(2rem, 5.5vw, 5rem) / 1 var(--font-display);
+  font: 600 clamp(1.5rem, 3.4vw, 3rem) / 1 var(--font-display);
   letter-spacing: -0.02em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -830,7 +828,7 @@ strong {
 
 .section__title {
   margin-bottom: clamp(3rem, 6vw, 5rem);
-  font: 800 clamp(2.6rem, 7vw, 6.5rem) / 0.95 var(--font-display);
+  font: 700 clamp(2.3rem, 4.6vw, 4.25rem) / 1 var(--font-display);
   letter-spacing: -0.04em;
 }
 
@@ -842,7 +840,7 @@ strong {
 /* ---------- About ---------- */
 .about__statement {
   max-width: 24ch;
-  font: 600 clamp(1.9rem, 4.6vw, 4.6rem) / 1.08 var(--font-display);
+  font: 500 clamp(1.6rem, 3.3vw, 3.2rem) / 1.15 var(--font-display);
   letter-spacing: -0.03em;
 }
 
@@ -912,7 +910,7 @@ strong {
 
 .stat dd {
   margin: 0;
-  font: 800 clamp(2.6rem, 6vw, 5.5rem) / 1 var(--font-display);
+  font: 700 clamp(2.4rem, 4.5vw, 4rem) / 1 var(--font-display);
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
@@ -1055,7 +1053,7 @@ strong {
 }
 
 .exp__aside .section__title {
-  font-size: clamp(2.6rem, 4.3vw, 5rem);
+  font-size: clamp(2.3rem, 3.8vw, 4rem);
 }
 
 .exp__timeline {
@@ -1238,7 +1236,7 @@ strong {
   position: absolute;
   left: 1.25rem;
   bottom: 0.25rem;
-  font: 800 clamp(4rem, 7vw, 6.5rem) / 1 var(--font-display);
+  font: 700 clamp(3.5rem, 6vw, 5.5rem) / 1 var(--font-display);
   letter-spacing: -0.05em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(238, 237, 233, 0.28);
@@ -1426,7 +1424,7 @@ strong {
 }
 
 .work.is-horizontal .section__title {
-  font-size: clamp(2.6rem, min(6vw, 10vh), 6rem);
+  font-size: clamp(2.3rem, min(4.6vw, 8vh), 4.25rem);
 }
 
 .work.is-horizontal .project--more {
@@ -1442,8 +1440,8 @@ strong {
 .contact__title {
   max-width: 13ch;
   margin-bottom: clamp(2rem, 4vw, 3rem);
-  font: 800 clamp(2rem, 9.5vw, 9.5rem) / 0.92 var(--font-display);
-  letter-spacing: -0.045em;
+  font: 700 clamp(2.2rem, 6vw, 6rem) / 1 var(--font-display);
+  letter-spacing: -0.035em;
 }
 
 .contact__title em {
@@ -1608,11 +1606,7 @@ strong {
   }
 
   .hero__title {
-    font-size: 12.6vw;
-  }
-
-  .hero__title .line--indent {
-    padding-left: 0;
+    font-size: clamp(2.6rem, 14vw, 4.25rem);
   }
 
   .hero__bottom {
