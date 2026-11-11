@@ -8,7 +8,7 @@
     <meta name="description" content="All of Vidura Naveen's links in one place — portfolio, GitHub, LinkedIn, Instagram, TikTok and Facebook.">
     <meta name="theme-color" content="#0a0a0b">
     <link rel="canonical" href="https://vidura.site/links/">
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
     <meta property="og:type" content="profile">
     <meta property="og:title" content="Vidura Naveen — Links">
@@ -393,7 +393,7 @@
         <main>
             <section class="profile">
                 <div class="avatar rise" style="--i:1">
-                    <img src="/assets/profile.jpg" alt="Portrait of Vidura Naveen" width="112" height="112">
+                    <img src="../assets/profile.jpg" alt="Portrait of Vidura Naveen" width="112" height="112">
                 </div>
                 <h1 class="name rise" style="--i:2">Vidura Naveen<span>.</span></h1>
                 <p class="role rise" style="--i:3">Full-stack software engineer · Sri Lanka</p>
@@ -410,7 +410,7 @@
 
             <ul class="links">
                 <li class="rise" style="--i:6">
-                    <a class="link link--featured" href="/">
+                    <a class="link link--featured" href="../">
                         <span class="link__icon"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg></span>
                         <span class="link__text"><span class="link__title">Portfolio</span><span class="link__sub">vidura.site — projects &amp; experience</span></span>
                         <svg class="i link__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
@@ -463,7 +463,7 @@
                     </a>
                 </li>
                 <li class="rise" style="--i:14">
-                    <a class="link" href="/links/vidura-naveen.vcf" download="Vidura Naveen.vcf">
+                    <a class="link" href="vidura-naveen.vcf" download="Vidura Naveen.vcf">
                         <span class="link__icon"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M19 8v6M22 11h-6" /></svg></span>
                         <span class="link__text"><span class="link__title">Save my contact</span><span class="link__sub">Add to your phone in one tap</span></span>
                         <svg class="i link__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
@@ -473,7 +473,7 @@
         </main>
 
         <footer class="foot rise" style="--i:15">
-            © <span class="year">2026</span> Vidura Naveen · <a href="/">vidura.site</a>
+            © <span class="year">2026</span> Vidura Naveen · <a href="../">vidura.site</a>
         </footer>
     </div>
 
@@ -488,9 +488,17 @@
         <symbol id="fb" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" /></symbol>
     </svg>
 
-    <script src="/js/webgl.js" defer></script>
+    <script src="../js/webgl.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Opened straight from disk (file://)? Folder links like "../" need an explicit index.html
+            if (location.protocol === 'file:') {
+                document.querySelectorAll('a[href$="/"]').forEach((a) => {
+                    const href = a.getAttribute('href');
+                    if (!/^[a-z]+:/i.test(href)) a.setAttribute('href', `${href}index.html`);
+                });
+            }
+
             // Fade the shader background in
             if (window.VNGL) {
                 const t0 = performance.now();

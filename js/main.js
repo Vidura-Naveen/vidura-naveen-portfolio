@@ -22,6 +22,14 @@
        1. Library-free features
        ===================================================== */
 
+    // Opened straight from disk (file://)? Folder links like "links/" need an explicit index.html
+    if (location.protocol === 'file:') {
+        $$('a[href$="/"]').forEach((a) => {
+            const href = a.getAttribute('href');
+            if (!/^[a-z]+:/i.test(href)) a.setAttribute('href', `${href}index.html`);
+        });
+    }
+
     // Footer year
     $$('.year').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 
