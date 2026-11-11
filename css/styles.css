@@ -197,11 +197,6 @@ strong {
   letter-spacing: 0.1em;
 }
 
-.preloader__logo {
-  color: var(--fg);
-  font-weight: 500;
-}
-
 .preloader__count {
   align-self: flex-end;
   display: flex;
@@ -431,11 +426,6 @@ strong {
   background: rgba(236, 235, 230, 0.7);
 }
 
-.nav__logo {
-  font: 500 1.05rem var(--font-mono);
-  letter-spacing: -0.02em;
-}
-
 .nav__links {
   display: flex;
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
@@ -483,6 +473,7 @@ strong {
 
 .nav__menu {
   display: none;
+  margin-left: auto;
   align-items: center;
   gap: 0.75rem;
   font: 500 0.78rem var(--font-mono);
@@ -1646,5 +1637,174 @@ strong {
 
   .grain {
     display: none;
+  }
+}
+
+/* ---------- Hero 3D object ---------- */
+.hero__object {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--pad) - 2vw);
+  z-index: 0;
+  width: min(46vw, 74vh, 52rem);
+  aspect-ratio: 1;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.hero > :not(.hero__object) {
+  position: relative;
+  z-index: 1;
+}
+
+.hero > .hero__scroll {
+  position: absolute;
+}
+
+@media (max-width: 960px) {
+  .hero__object {
+    top: 7.5rem;
+    right: -12vw;
+    width: min(88vw, 34rem);
+    translate: none;
+    opacity: 0.9;
+  }
+
+  .hero__title {
+    align-self: end;
+  }
+}
+
+/* ---------- Social icon buttons ---------- */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.social svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.contact__list .social:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.contact__alllinks {
+  margin-left: auto;
+  font: 500 0.8rem var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero {
+  overflow: clip;
+}
+
+/* ---------- Nav: link-tree pill ---------- */
+.nav__status {
+  margin-left: auto;
+}
+
+.nav__tree {
+  --chip-bg: #161619;
+  --chip-fg: #eeede9;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.3rem 0.95rem 0.3rem 0.3rem;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 99px;
+  font: 500 0.74rem var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: background-color 0.35s, border-color 0.35s, color 0.35s;
+}
+
+.nav__tree-stack {
+  display: flex;
+}
+
+.nav__tree-stack i {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-left: -0.6rem;
+  border: 1.5px solid var(--chip-bg);
+  border-radius: 50%;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 18%, transparent);
+  transition: margin 0.5s var(--ease), transform 0.5s var(--ease), color 0.3s;
+}
+
+.nav__tree-stack i:first-child {
+  margin-left: 0;
+}
+
+.nav__tree-stack i:nth-child(2) { transition-delay: 0.03s; }
+.nav__tree-stack i:nth-child(3) { transition-delay: 0.06s; }
+
+.nav__tree-stack svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: currentColor;
+}
+
+.nav__tree-arrow {
+  width: 0.85rem;
+  height: 0.85rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.45s var(--ease);
+}
+
+.nav__tree:hover,
+.nav__tree:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0a0b;
+}
+
+/* icons fan out and hop on hover */
+.nav__tree:hover .nav__tree-stack i {
+  margin-left: 0.15rem;
+  color: var(--accent);
+  transform: translateY(-1px) rotate(-8deg);
+}
+
+.nav__tree:hover .nav__tree-stack i:first-child {
+  margin-left: 0;
+}
+
+.nav__tree:hover .nav__tree-arrow {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 960px) {
+  .nav__tree {
+    padding-right: 0.8rem;
   }
 }

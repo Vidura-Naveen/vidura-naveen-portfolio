@@ -136,6 +136,7 @@
     if (!window.gsap || !window.ScrollTrigger) {
         markReady();
         if (window.VNGL) window.VNGL.setIntro(1);
+        if (window.VNORB) window.VNORB.setIntro(1);
         return;
     }
 
@@ -202,6 +203,7 @@
             heroIntro.progress(1);
             markReady();
             if (window.VNGL) window.VNGL.setIntro(1);
+            if (window.VNORB) window.VNORB.setIntro(1);
             ScrollTrigger.refresh();
             jumpToHash();
             return;
@@ -257,6 +259,17 @@
                 ease: 'power2.out',
                 onUpdate: () => window.VNGL.setIntro(glIntro.v),
             }, 0);
+        }
+
+        // 3D atom grows in with an elastic overshoot
+        if (window.VNORB) {
+            const orbIntro = { v: 0 };
+            tl.to(orbIntro, {
+                v: 1,
+                duration: 2.6,
+                ease: 'elastic.out(1, 0.55)',
+                onUpdate: () => window.VNORB.setIntro(orbIntro.v),
+            }, 0.5);
         }
 
         // Headline eases up and fades as you scroll away
