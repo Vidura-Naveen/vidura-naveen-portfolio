@@ -1809,114 +1809,12 @@ strong {
   }
 }
 
-/* ---------- Experience: key projects ---------- */
-.job__projects {
-  margin: 0 0 1.75rem;
+/* Sinhala text (e.g. project names) */
+:lang(si) {
+  font-family: "Noto Sans Sinhala", "Iskoola Pota", sans-serif;
 }
 
-.job__label {
-  margin-bottom: 0.9rem;
-  font: 400 0.72rem var(--font-mono);
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.gov-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: 0.9rem;
-}
-
-.gov {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.25rem 1.3rem 1.2rem;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 1.1rem;
-  background: rgba(255, 255, 255, 0.02);
-  transition: border-color 0.35s, background-color 0.35s, transform 0.5s var(--ease);
-}
-
-.gov::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(22rem circle at 100% 0%, rgba(34, 211, 238, 0.12), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
-}
-
-.gov:hover {
-  border-color: rgba(34, 211, 238, 0.5);
-  transform: translateY(-3px);
-}
-
-.gov:hover::before {
-  opacity: 1;
-}
-
-.gov__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.6rem;
-}
-
-.gov__tag {
-  padding: 0.2rem 0.6rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font: 400 0.66rem var(--font-mono);
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.gov__arrow {
-  width: 1.1rem;
-  height: 1.1rem;
-  fill: none;
-  stroke: var(--muted);
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.45s var(--ease), stroke 0.3s;
-}
-
-.gov:hover .gov__arrow {
-  stroke: var(--accent);
-  transform: rotate(45deg);
-}
-
-.gov__si {
-  font: 700 clamp(1.5rem, 2vw, 1.9rem) / 1.35 "Noto Sans Sinhala", "Iskoola Pota", var(--font-display);
+.job__points strong {
+  font-weight: 600;
   color: var(--fg);
-}
-
-.gov__si .nw {
-  white-space: nowrap;
-}
-
-.gov__name {
-  font: 600 1rem / 1.3 var(--font-display);
-  letter-spacing: -0.01em;
-  color: var(--accent);
-}
-
-.gov__desc {
-  margin-top: 0.2rem;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--muted);
-}
-
-.gov__url {
-  margin-top: 0.6rem;
-  font: 400 0.72rem var(--font-mono);
-  color: var(--muted);
 }
